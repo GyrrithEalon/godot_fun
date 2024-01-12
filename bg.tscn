@@ -1,65 +1,90 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfiahrm5xv8hw"]
+[gd_scene load_steps=7 format=3 uid="uid://dfiahrm5xv8hw"]
 
 [ext_resource type="Script" path="res://BG.gd" id="1_lwy2m"]
 [ext_resource type="Texture2D" uid="uid://d0uxsnofekgua" path="res://Sunny-land-files/Graphical Assets/environment/Background/back.png" id="2_xnmxu"]
 [ext_resource type="Texture2D" uid="uid://dthknto2lfxnl" path="res://Sunny-land-files/Graphical Assets/environment/Props/house.png" id="3_b5ccn"]
 [ext_resource type="Texture2D" uid="uid://cywboqebtx2sj" path="res://Sunny-land-files/Graphical Assets/environment/Background/middle.png" id="3_lum5n"]
+[ext_resource type="Texture2D" uid="uid://xjmhonc006c3" path="res://Sunny-land-files/Graphical Assets/environment/Props/tree-house.png" id="4_ovp50"]
+[ext_resource type="Texture2D" uid="uid://cs56giny3wniq" path="res://Sunny-land-files/Graphical Assets/environment/Props/palm.png" id="5_fub2u"]
 
 [node name="BG" type="ParallaxBackground"]
 script = ExtResource("1_lwy2m")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="ParallaxLayer Back" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.7, 1)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="Back" type="Sprite2D" parent="ParallaxLayer"]
+[node name="Back" type="Sprite2D" parent="ParallaxLayer Back"]
 position = Vector2(586.5, 327)
 scale = Vector2(3.04948, 2.71667)
 texture = ExtResource("2_xnmxu")
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.7, 1)
+[node name="ParallaxLayer House" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 1)
 motion_mirroring = Vector2(1152, 0)
 
-[node name="House" type="Sprite2D" parent="ParallaxLayer3"]
-visibility_layer = 0
-position = Vector2(156, 317)
+[node name="House" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(179, 378)
 texture = ExtResource("3_b5ccn")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+[node name="House2" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(376, 364)
+texture = ExtResource("3_b5ccn")
+
+[node name="House3" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(701, 364)
+texture = ExtResource("3_b5ccn")
+
+[node name="Tree-house" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(524, 368)
+texture = ExtResource("4_ovp50")
+
+[node name="Palm" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(867, 368)
+texture = ExtResource("5_fub2u")
+
+[node name="Palm2" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(483, 366)
+texture = ExtResource("5_fub2u")
+
+[node name="Palm3" type="Sprite2D" parent="ParallaxLayer House"]
+position = Vector2(648, 349)
+texture = ExtResource("5_fub2u")
+
+[node name="ParallaxLayer Hill" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(1167, 0)
 
-[node name="Middle" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(83, 479)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
 
-[node name="Middle2" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle2" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(258, 484)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
 
-[node name="Middle3" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle3" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(422, 490)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
 
-[node name="Middle4" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle4" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(587, 489)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
 
-[node name="Middle5" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle5" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(762, 484)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
 
-[node name="Middle6" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle6" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(925, 481)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
 
-[node name="Middle7" type="Sprite2D" parent="ParallaxLayer2"]
+[node name="Middle7" type="Sprite2D" parent="ParallaxLayer Hill"]
 position = Vector2(1074, 480)
 texture = ExtResource("3_lum5n")
 metadata/_edit_lock_ = true
