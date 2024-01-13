@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://u55yyaq2kpc4"]
+
+[ext_resource type="Texture2D" uid="uid://e5uopet7anjk" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-1.png" id="1_yg3tt"]
+[ext_resource type="Texture2D" uid="uid://dq6xodlqkq8f3" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-2.png" id="2_umjta"]
+[ext_resource type="Texture2D" uid="uid://d1ior7o4juqnj" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-3.png" id="3_78efb"]
+[ext_resource type="Texture2D" uid="uid://dugvsutnap85f" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-4.png" id="4_nptkw"]
+[ext_resource type="Texture2D" uid="uid://crlv1pnne1kid" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-5.png" id="5_mlu4t"]
+[ext_resource type="Texture2D" uid="uid://c4e2kg21mb7hm" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-6.png" id="6_2jg0u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qv6du"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yg3tt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_umjta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_78efb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nptkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mlu4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2jg0u")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_fly5s"]
+script/source = "extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.play(\"default\")
+	print(self.position)
+	await self.animation_finished
+	self.queue_free()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="enemy_death" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_qv6du")
+offset = Vector2(0, -18.09)
+script = SubResource("GDScript_fly5s")

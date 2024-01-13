@@ -1,106 +1,37 @@
-[gd_scene load_steps=19 format=3 uid="uid://bojnbvnbsulyq"]
+[gd_scene load_steps=12 format=3 uid="uid://bojnbvnbsulyq"]
 
 [ext_resource type="Texture2D" uid="uid://dnee8u0jhmilc" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-1.png" id="1_gx5ym"]
-[ext_resource type="Texture2D" uid="uid://e5uopet7anjk" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-1.png" id="1_xoiqn"]
-[ext_resource type="Texture2D" uid="uid://dq6xodlqkq8f3" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-2.png" id="2_o4a2h"]
+[ext_resource type="Script" path="res://frog.gd" id="1_pcpx5"]
 [ext_resource type="Texture2D" uid="uid://cjlyag7pca6kd" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-2.png" id="2_puk5n"]
 [ext_resource type="Texture2D" uid="uid://b2hu2ug4xdu4f" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-3.png" id="3_g18uc"]
-[ext_resource type="Texture2D" uid="uid://d1ior7o4juqnj" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-3.png" id="3_gcrrm"]
-[ext_resource type="Texture2D" uid="uid://dx0ecwwmbfxxq" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-4.png" id="4_mxqvc"]
-[ext_resource type="Texture2D" uid="uid://dugvsutnap85f" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-4.png" id="4_phwtj"]
 [ext_resource type="Texture2D" uid="uid://326od1dk31at" path="res://Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-1.png" id="5_d8t6b"]
-[ext_resource type="Texture2D" uid="uid://crlv1pnne1kid" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-5.png" id="5_ee3om"]
-[ext_resource type="Texture2D" uid="uid://c4e2kg21mb7hm" path="res://Sunny-land-files/Graphical Assets/sprites/enemy-death/enemy-death-6.png" id="6_5lwdj"]
 [ext_resource type="Texture2D" uid="uid://mf454bed0wnh" path="res://Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-2.png" id="6_aovbp"]
-
-[sub_resource type="GDScript" id="GDScript_afqce"]
-script/source = "extends CharacterBody2D
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
-var chase = false
-var player
-var SPEED = 70
-var JUMP_VELOCITY = 400
-
-@onready var anim = get_node(\"Ani\")
-
-func _ready():
-	anim.play(\"Idle\")
-	
-
-func _physics_process(delta):
-	velocity.y += gravity * delta
-	player = get_node(\"../../player/player\")
-	var direction = (player.position - self.position).normalized()
-	if chase:
-		if get_node(\"Ani\").animation != \"Death\":
-			get_node(\"Ani\").play(\"Jump\")
-			if direction.x > 0:
-				get_node(\"Ani\").flip_h = true
-			else:
-				get_node(\"Ani\").flip_h = false
-			velocity.x = direction.x * SPEED
-	else:
-		if get_node(\"Ani\").animation != \"Death\":
-			velocity.x = 0
-			get_node(\"Ani\").play(\"Idle\")
-	move_and_slide()
-	
-func _on_area_2d_body_entered(body):
-	if body.name == \"player\":
-		chase = true
-func _on_area_2d_body_exited(body):
-	if body.name == \"player\":
-		chase = false
-
-func _on_play_death_body_entered(body):
-	if body.name == \"player\":
-		Death()
-
-func _on_play_hit_body_entered(body):
-	if body.name == \"player\":
-		Game.playerHP -= 5
-		Death()
-		
-func Death ():
-	chase = false
-	Game.playerGold += 5
-	Utils.saveGame()
-	get_node(\"Ani\").play(\"Death\")
-	await get_node(\"Ani\").animation_finished
-	self.queue_free()
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hufj3"]
 size = Vector2(20, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1npgu"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_xoiqn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_o4a2h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_gcrrm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_phwtj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_ee3om")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_5lwdj")
-}],
+"frames": [],
 "loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_aovbp")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gx5ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_gx5ym")
+}, {
 "duration": 1.0,
 "texture": ExtResource("1_gx5ym")
 }, {
@@ -117,7 +48,13 @@ animations = [{
 "texture": ExtResource("3_g18uc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_mxqvc")
+"texture": ExtResource("3_g18uc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_puk5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_gx5ym")
 }, {
 "duration": 1.0,
 "texture": ExtResource("1_gx5ym")
@@ -129,9 +66,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_d8t6b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_aovbp")
 }],
 "loop": true,
 "name": &"Jump",
@@ -145,10 +79,10 @@ radius = 124.082
 size = Vector2(18, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odwll"]
-size = Vector2(25, 12)
+size = Vector2(32, 12)
 
 [node name="Frog" type="CharacterBody2D"]
-script = SubResource("GDScript_afqce")
+script = ExtResource("1_pcpx5")
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -180,10 +114,14 @@ shape = SubResource("RectangleShape2D_at8p2")
 position = Vector2(0, -9.5)
 
 [node name="player_detection" type="CollisionShape2D" parent="PlayHit"]
-position = Vector2(0.5, 3.5)
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_odwll")
+
+[node name="jump_timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="PlayDetection" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="PlayDetection" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="PlayDeath" to="." method="_on_play_death_body_entered"]
 [connection signal="body_entered" from="PlayHit" to="." method="_on_play_hit_body_entered"]
+[connection signal="timeout" from="jump_timer" to="." method="_on_jump_timer_timeout"]
